@@ -24,7 +24,7 @@ app.use((req, _res, next) => {
 
 
 
-// Serve static images: anything in /images can be loaded by browser
+// Serve static lesson images from the local images/ folder
 app.use('/images', express.static('images'));
 
 
@@ -81,6 +81,7 @@ app.get('/', (_req, res) => {
 
 
 
+
 // Info route describing this backend service
 app.get('/api/info', (_req, res) => {
   res.json({
@@ -89,6 +90,7 @@ app.get('/api/info', (_req, res) => {
     description: 'Provides lessons and order endpoints for the Vue frontend.'
   });
 });
+
 
 
 
