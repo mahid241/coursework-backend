@@ -55,6 +55,15 @@ app.get('/', (_req, res) => {
   res.send('OK');
 });
 
+// Info route describing this backend service
+app.get('/api/info', (_req, res) => {
+  res.json({
+    name: 'After School Lessons API',
+    version: '1.0.0',
+    description: 'Provides lessons and order endpoints for the Vue frontend.'
+  });
+});
+
 // GET all lessons from the database
 app.get('/lessons', async (_req, res) => {
   try {
@@ -119,7 +128,9 @@ app.put('/lessons/:id', async (req, res) => {
     }
 
     const update = req.body; // { spaces: 3 }, or any field
-    if (!update || typeof update !== 'object') {
+
+    // Validate update payload is a non-empty object
+    if (!update || typeof update !== 'object' || Object.keys(update).length === 0) {
       return res.status(400).json({ error: 'Invalid update payload' });
     }
 
