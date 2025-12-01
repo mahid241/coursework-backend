@@ -10,7 +10,8 @@ const { MongoClient, ObjectId } = require('mongodb'); // MongoDB tools
 
 
 const app = express();
-app.use(cors()); // Enable CORS for all origins (frontend can reach backend)
+// Enable CORS so the Vue frontend (GitHub Pages / Render) can call this API
+app.use(cors());
 app.use(express.json()); // Support JSON bodies in API requests
 
 
@@ -97,6 +98,7 @@ app.get('/lessons', async (_req, res) => {
     const docs = await lessonsCol.find({}).toArray(); // Get all lessons
 
 
+
     // Map MongoDB '_id' to 'id' expected by frontend, with safe defaults
     const mapped = docs.map(d => ({
       id: d._id?.toString(),
@@ -109,11 +111,13 @@ app.get('/lessons', async (_req, res) => {
 
 
 
+
     res.json(mapped); // Send mapped lessons to frontend
   } catch (e) {
     res.status(500).json({ error: 'Failed to fetch lessons' });
   }
 });
+
 
 
 
@@ -127,6 +131,7 @@ app.post('/orders', async (req, res) => {
 
 
 
+
     // Convert lessonIDs to MongoDB ObjectIds
     const lessonObjectIds = lessonIDs
       .filter(Boolean)
@@ -134,6 +139,7 @@ app.post('/orders', async (req, res) => {
         try { return new ObjectId(id); } catch { return null; }
       })
       .filter(v => v);
+
 
 
 
@@ -148,11 +154,13 @@ app.post('/orders', async (req, res) => {
 
 
 
+
     res.status(201).json({ insertedId: result.insertedId }); // Return new order's id
   } catch (e) {
     res.status(500).json({ error: 'Failed to create order' });
   }
 });
+
 
 
 
@@ -169,7 +177,9 @@ app.put('/lessons/:id', async (req, res) => {
 
 
 
+
     const update = req.body; // { spaces: 3 }, or any field
+
 
 
 
@@ -177,6 +187,7 @@ app.put('/lessons/:id', async (req, res) => {
     if (!update || typeof update !== 'object' || Object.keys(update).length === 0) {
       return res.status(400).json({ error: 'Invalid update payload' });
     }
+
 
 
 
