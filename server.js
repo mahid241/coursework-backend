@@ -74,7 +74,7 @@ start();
 
 
 
-// Health check endpoint (just returns 'OK' if server is working)
+// Health check endpoint (used to quickly see if the server is running)
 app.get('/', (_req, res) => {
   res.send('OK');
 });
