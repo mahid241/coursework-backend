@@ -81,8 +81,7 @@ app.get('/', (_req, res) => {
 
 
 
-
-// Info route describing this backend service
+// Info route describing this backend service (useful for report/demo)
 app.get('/api/info', (_req, res) => {
   res.json({
     name: 'After School Lessons API',
