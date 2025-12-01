@@ -8,29 +8,30 @@ The frontend is built with Vue.js, and the backend uses Express.js with a MongoD
 ## Links
 
 - [Vue.js App – GitHub Repository](https://github.com/mahid241/coursework-frontend)
-
 - [Vue.js App – Live on GitHub Pages](https://mahid241.github.io/coursework-frontend/)
-
 - [Express.js App – GitHub Repository](https://github.com/mahid241/coursework-backend)
-
 - [Render Express.js App – All Lessons Route](https://coursework-backend-rcvf.onrender.com/lessons)
 
 ---
 
-## How to Run Locally (Optional)
+## Backend API (this repository)
 
-### Frontend
-1. Clone the frontend repo  
-   `git clone https://github.com/mahid241/coursework-frontend.git`
-2. Open `index.html` in a browser or use a simple HTTP server.
+This repository contains the Express.js API for the After School Lessons app.
 
-### Backend
-1. Clone the backend repo  
-   `git clone https://github.com/mahid241/coursework-backend.git`
-2. Install dependencies  
-   `npm install`
-3. Create a `.env` file with `MONGODB_URI` and `PORT`.
-4. Start the server  
-   `npm start`
+### Main endpoints
 
-The frontend is configured to talk to the deployed backend using the Render URL above.
+- `GET /lessons` – returns all lessons from the MongoDB `lessons` collection.
+- `POST /orders` – creates a new order in the `orders` collection.
+- `PUT /lessons/:id` – updates a lesson document (for example remaining `spaces`).
+- `GET /api/info` – returns basic information about this API.
+- `GET /` – simple health check that responds with `OK`.
+
+### Environment variables
+
+Create a `.env` file in the project root with:
+
+- `MONGODB_URI` – MongoDB Atlas connection string for the `courseworkfullstack` database.
+- `PORT` (optional) – port for the Express server. Defaults to `3000` if not set.
+
+Example:
+
